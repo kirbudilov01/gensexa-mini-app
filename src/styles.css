@@ -26,6 +26,7 @@ html,
 body,
 #root {
   min-height: 100%;
+  height: 100%;
   margin: 0;
 }
 
@@ -35,6 +36,7 @@ body {
     radial-gradient(circle at 0% 12%, rgba(255, 217, 122, 0.1), transparent 28%),
     linear-gradient(180deg, #22012e 0%, var(--bg-deep) 100%);
   overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 button,
@@ -64,7 +66,7 @@ a {
   min-height: 100dvh;
   max-width: 520px;
   margin: 0 auto;
-  padding: max(16px, env(safe-area-inset-top)) 16px calc(136px + env(safe-area-inset-bottom));
+  padding: max(16px, env(safe-area-inset-top)) 16px calc(96px + env(safe-area-inset-bottom));
   overflow: hidden;
 }
 
@@ -873,7 +875,7 @@ input[type="range"] {
   border-radius: 26px;
   background: linear-gradient(150deg, rgba(64, 20, 78, 0.86), rgba(24, 4, 33, 0.86));
   box-shadow: var(--shadow);
-  padding: 18px 18px 104px;
+  padding: 18px;
   backdrop-filter: blur(22px);
 }
 
@@ -1318,7 +1320,7 @@ input[type="range"] {
   position: fixed;
   z-index: 30;
   right: 50%;
-  bottom: max(12px, env(safe-area-inset-bottom));
+  bottom: max(8px, env(safe-area-inset-bottom));
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: min(488px, calc(100vw - 24px));
@@ -1395,6 +1397,215 @@ input[type="range"] {
   padding: 10px 12px;
   font-size: 12px;
   font-weight: 800;
+}
+
+body.native-app {
+  background: #09000f;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.native-app #root {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+body.native-app .app-shell,
+body.native-app .onboarding {
+  width: 100%;
+  max-width: none;
+  min-height: 100dvh;
+  height: 100dvh;
+  margin: 0;
+  padding: max(10px, env(safe-area-inset-top)) 14px calc(74px + env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.native-app .onboarding {
+  align-content: start;
+  padding-top: max(18px, env(safe-area-inset-top));
+}
+
+body.native-app .aurora {
+  opacity: 0.45;
+}
+
+body.native-app .topbar {
+  top: 0;
+  margin: 0 -14px;
+  padding: 8px 14px 10px;
+  background: linear-gradient(180deg, rgba(9, 0, 15, 0.96), rgba(9, 0, 15, 0.72));
+}
+
+body.native-app .section-rail {
+  top: 68px;
+  margin: 0 -14px 8px;
+  padding: 2px 14px 8px;
+  background: linear-gradient(180deg, rgba(9, 0, 15, 0.84), rgba(9, 0, 15, 0.3));
+}
+
+body.native-app h1 {
+  font-size: 26px;
+}
+
+body.native-app h2 {
+  font-size: 24px;
+}
+
+body.native-app p {
+  font-size: 14px;
+  line-height: 1.42;
+}
+
+body.native-app .content,
+body.native-app .stack {
+  gap: 10px;
+}
+
+body.native-app .onboarding-card,
+body.native-app .pulse-hero,
+body.native-app .panel,
+body.native-app .practice-card,
+body.native-app .body-map-panel,
+body.native-app .practice-list,
+body.native-app .active-session,
+body.native-app .consultant-card,
+body.native-app .belief-card,
+body.native-app .profile-card,
+body.native-app .paywall,
+body.native-app .daily-character-card,
+body.native-app .day-item,
+body.native-app .choice-row,
+body.native-app .lesson-row,
+body.native-app .course-card,
+body.native-app .mini-card {
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+body.native-app .pulse-hero,
+body.native-app .practice-card,
+body.native-app .panel,
+body.native-app .body-map-panel,
+body.native-app .practice-list,
+body.native-app .active-session,
+body.native-app .consultant-card,
+body.native-app .belief-card,
+body.native-app .profile-card,
+body.native-app .paywall {
+  padding: 14px;
+}
+
+body.native-app .brand-mark--compact {
+  width: 44px;
+  height: 44px;
+}
+
+body.native-app .pulse-hero {
+  min-height: auto;
+  gap: 12px;
+}
+
+body.native-app .pulse-score {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4px 10px;
+}
+
+body.native-app .pulse-score b {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  font-size: 30px;
+}
+
+body.native-app .pulse-score i {
+  grid-column: 1 / -1;
+}
+
+body.native-app .daily-character-card {
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  padding: 12px;
+}
+
+body.native-app .character-glyph {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  font-size: 23px;
+}
+
+body.native-app .day-item {
+  padding: 12px;
+}
+
+body.native-app .slider-row {
+  grid-template-columns: 82px 1fr 22px;
+  margin-top: 10px;
+}
+
+body.native-app .body-visual {
+  height: 230px;
+  margin: 12px 0;
+  border-radius: 18px;
+}
+
+body.native-app .body-line {
+  inset: 28px 50%;
+  width: 94px;
+}
+
+body.native-app .session-figure {
+  height: 210px;
+  border-radius: 18px;
+}
+
+body.native-app .timer-display span {
+  font-size: 42px;
+}
+
+body.native-app .instruction-card {
+  border-radius: 16px;
+  padding: 13px;
+}
+
+body.native-app .instruction-card h2 {
+  font-size: 22px;
+}
+
+body.native-app .cycle-grid {
+  gap: 6px;
+}
+
+body.native-app .cycle-grid button {
+  border-radius: 11px;
+  font-size: 12px;
+}
+
+body.native-app .tabbar {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  transform: none;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 0;
+  padding: 5px 8px max(6px, env(safe-area-inset-bottom));
+  background: rgba(12, 1, 18, 0.94);
+  box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.28);
+}
+
+body.native-app .tabbar button {
+  min-height: 49px;
+  border-radius: 14px;
+  font-size: 9px;
+}
+
+body.native-app .tabbar button span {
+  font-size: 16px;
 }
 
 @media (max-width: 370px) {

@@ -213,6 +213,8 @@ function App() {
   const [practiceId, setPracticeId] = useState("reverse-kegel");
 
   useEffect(() => {
+    const isNative = Boolean(window.Capacitor?.isNativePlatform?.());
+    document.body.classList.toggle("native-app", isNative);
     tg?.ready();
     tg?.expand();
     tg?.setHeaderColor?.("#16021f");

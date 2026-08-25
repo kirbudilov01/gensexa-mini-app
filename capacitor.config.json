@@ -3,6 +3,6 @@
   "appName": "Gensexa",
   "webDir": "dist",
   "ios": {
-    "contentInset": "always"
+    "contentInset": "never"
   }
 }
