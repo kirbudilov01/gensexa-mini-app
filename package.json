@@ -6,13 +6,18 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
+    "build:ios": "BUILD_TARGET=ios vite build",
+    "ios:sync": "npm run build:ios && cap sync ios",
+    "ios:open": "npm run ios:sync && cap open ios",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
+    "@capacitor/cli": "^8.5.0",
+    "@capacitor/core": "^8.5.0",
+    "@capacitor/ios": "^8.5.0",
     "@vitejs/plugin-react": "^5.1.1",
-    "vite": "^7.2.7",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
-  },
-  "devDependencies": {}
+    "react-dom": "^19.2.3",
+    "vite": "^7.2.7"
+  }
 }

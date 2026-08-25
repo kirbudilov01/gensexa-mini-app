@@ -1,0 +1,8 @@
+{
+  "appId": "ru.gensexa.app",
+  "appName": "Gensexa",
+  "webDir": "dist",
+  "ios": {
+    "contentInset": "always"
+  }
+}

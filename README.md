@@ -47,7 +47,29 @@ npm run build
 
 Deploy `dist/` to any static host with HTTPS. Then run `bot/gensexa_bot.py` as a worker process with the production Mini App URL.
 
+## iOS App
+
+The mobile app is a Capacitor wrapper around the same React experience.
+
+```bash
+npm install
+npm run ios:sync
+npm run ios:open
+```
+
+In Xcode:
+
+- open the `App` scheme
+- choose your connected iPhone
+- set a personal Apple developer team under `Signing & Capabilities`
+- press Run
+
+If command-line Xcode tools point to Command Line Tools instead of Xcode, either open the project directly from Xcode or run commands with:
+
+```bash
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer npm run ios:open
+```
+
 ## Safety Note
 
 Do not commit `.env.local`, bot tokens, Telegram sessions, or other credentials.
-
