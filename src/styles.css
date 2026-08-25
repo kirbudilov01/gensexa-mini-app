@@ -145,53 +145,6 @@ a {
   backdrop-filter: blur(18px);
 }
 
-.section-rail {
-  position: sticky;
-  z-index: 12;
-  top: 78px;
-  display: flex;
-  gap: 8px;
-  margin: -4px -16px 10px;
-  padding: 4px 16px 10px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  backdrop-filter: blur(18px);
-}
-
-.section-rail::-webkit-scrollbar {
-  display: none;
-}
-
-.section-rail button {
-  display: inline-flex;
-  min-width: max-content;
-  min-height: 42px;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid rgba(255, 217, 122, 0.14);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--muted);
-  padding: 0 13px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
-}
-
-.section-rail button span {
-  color: currentColor;
-  font-size: 15px;
-}
-
-.section-rail button b {
-  font-size: 12px;
-  font-weight: 850;
-}
-
-.section-rail button.is-active {
-  border-color: rgba(255, 217, 122, 0.46);
-  background: linear-gradient(135deg, rgba(255, 217, 122, 0.18), rgba(224, 88, 154, 0.13));
-  color: var(--gold);
-}
-
 h1,
 h2,
 h3,
@@ -323,6 +276,101 @@ p {
   padding: 22px;
 }
 
+.daily-board {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 76% 16%, rgba(255, 217, 122, 0.18), transparent 34%),
+    radial-gradient(circle at 18% 100%, rgba(224, 88, 154, 0.18), transparent 42%),
+    linear-gradient(150deg, rgba(67, 18, 78, 0.94), rgba(20, 2, 30, 0.92));
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.daily-board-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.round-action {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(255, 217, 122, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--gold);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.status-icons {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr 0.75fr;
+  gap: 10px;
+}
+
+.status-tile {
+  display: grid;
+  min-height: 94px;
+  align-content: center;
+  gap: 5px;
+  border: 1px solid rgba(255, 217, 122, 0.15);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.065);
+  padding: 12px;
+  text-align: left;
+}
+
+.status-tile span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 13px;
+  background: linear-gradient(135deg, var(--gold), var(--rose));
+  color: #2a0731;
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.status-tile b {
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1.04;
+}
+
+.status-tile small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.status-tile--wide b {
+  font-size: 16px;
+}
+
+.daily-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.daily-progress i {
+  display: block;
+  width: var(--score);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--gold), var(--rose));
+}
+
 .pulse-score {
   display: grid;
   gap: 5px;
@@ -357,6 +405,20 @@ p {
 .day-plan {
   display: grid;
   gap: 10px;
+}
+
+.today-actions {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.055);
+  padding: 14px;
+}
+
+.section-title {
+  display: grid;
+  gap: 2px;
 }
 
 .daily-character-card {
@@ -797,6 +859,7 @@ input[type="range"] {
 .body-map-panel,
 .motion-panel,
 .consultant-card,
+.nlp-hero,
 .belief-card,
 .profile-card {
   border: 1px solid var(--line);
@@ -805,6 +868,13 @@ input[type="range"] {
   box-shadow: var(--shadow);
   padding: 18px;
   backdrop-filter: blur(22px);
+}
+
+.nlp-hero {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 16px;
+  align-items: center;
 }
 
 .body-visual {
@@ -881,13 +951,49 @@ input[type="range"] {
 
 .practice-option {
   display: grid;
-  grid-template-columns: 1fr 96px;
+  grid-template-columns: 58px 1fr 86px;
   gap: 12px;
   align-items: stretch;
   border: 1px solid rgba(255, 217, 122, 0.14);
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.06);
   padding: 12px;
+}
+
+.motion-preview {
+  position: relative;
+  min-height: 78px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 68%, rgba(224, 88, 154, 0.2), transparent 55%),
+    rgba(255, 255, 255, 0.055);
+  overflow: hidden;
+}
+
+.motion-preview .figure-head {
+  top: 10px;
+  width: 16px;
+  height: 16px;
+}
+
+.motion-preview .figure-spine {
+  top: 30px;
+  height: 32px;
+  width: 3px;
+}
+
+.motion-preview .figure-hips {
+  top: 56px;
+  width: 42px;
+  height: 18px;
+  border-width: 3px;
+}
+
+.motion-preview .figure-ribbon {
+  top: 39px;
+  width: 52px;
+  height: 28px;
+  border-top-width: 3px;
 }
 
 .practice-option.selected {
@@ -1166,6 +1272,24 @@ input[type="range"] {
   gap: 6px;
 }
 
+.lesson-row {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+}
+
+.lesson-row em {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 16px;
+  background: rgba(255, 217, 122, 0.12);
+  color: var(--gold);
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 900;
+}
+
 .back {
   width: fit-content;
   margin-bottom: 18px;
@@ -1217,6 +1341,45 @@ input[type="range"] {
   font-size: 26px;
   font-weight: 900;
   text-align: center;
+}
+
+.rewrite-flow {
+  display: grid;
+  gap: 10px;
+}
+
+.rewrite-flow div {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 3px 12px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.065);
+  padding: 12px;
+}
+
+.rewrite-flow span {
+  display: grid;
+  grid-row: 1 / span 2;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 217, 122, 0.14);
+  color: var(--gold);
+  font-weight: 900;
+}
+
+.rewrite-flow small {
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.rewrite-flow b {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.25;
 }
 
 .moon {
@@ -1306,6 +1469,15 @@ input[type="range"] {
   color: var(--gold);
   font-size: 14px;
   font-weight: 850;
+}
+
+.settings-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.secondary-reset {
+  opacity: 0.72;
 }
 
 .course-card i {
@@ -1439,10 +1611,7 @@ body.native-app .topbar {
 }
 
 body.native-app .section-rail {
-  top: 68px;
-  margin: 0 -14px 8px;
-  padding: 2px 14px 8px;
-  background: linear-gradient(180deg, rgba(9, 0, 15, 0.84), rgba(9, 0, 15, 0.3));
+  display: none;
 }
 
 body.native-app h1 {
@@ -1465,6 +1634,7 @@ body.native-app .stack {
 
 body.native-app .onboarding-card,
 body.native-app .pulse-hero,
+body.native-app .daily-board,
 body.native-app .panel,
 body.native-app .practice-card,
 body.native-app .body-map-panel,
@@ -1475,6 +1645,7 @@ body.native-app .belief-card,
 body.native-app .profile-card,
 body.native-app .paywall,
 body.native-app .daily-character-card,
+body.native-app .today-actions,
 body.native-app .day-item,
 body.native-app .choice-row,
 body.native-app .lesson-row,
@@ -1485,6 +1656,7 @@ body.native-app .mini-card {
 }
 
 body.native-app .pulse-hero,
+body.native-app .daily-board,
 body.native-app .practice-card,
 body.native-app .panel,
 body.native-app .body-map-panel,
@@ -1505,6 +1677,35 @@ body.native-app .brand-mark--compact {
 body.native-app .pulse-hero {
   min-height: auto;
   gap: 12px;
+}
+
+body.native-app .daily-board {
+  border-radius: 20px;
+}
+
+body.native-app .status-icons {
+  grid-template-columns: 1fr 0.72fr 0.72fr;
+  gap: 8px;
+}
+
+body.native-app .status-tile {
+  min-height: 82px;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+body.native-app .status-tile span {
+  width: 30px;
+  height: 30px;
+  border-radius: 11px;
+}
+
+body.native-app .status-tile b {
+  font-size: 18px;
+}
+
+body.native-app .status-tile--wide b {
+  font-size: 15px;
 }
 
 body.native-app .pulse-score {
@@ -1583,6 +1784,26 @@ body.native-app .cycle-grid button {
   font-size: 12px;
 }
 
+body.native-app .practice-option {
+  grid-template-columns: 52px 1fr 74px;
+  gap: 9px;
+  padding: 10px;
+}
+
+body.native-app .practice-option-main b {
+  font-size: 16px;
+}
+
+body.native-app .practice-option-main em {
+  font-size: 12px;
+}
+
+body.native-app .launch-button {
+  min-height: 64px;
+  border-radius: 15px;
+  font-size: 12px;
+}
+
 body.native-app .tabbar {
   left: 0;
   right: 0;
@@ -1626,6 +1847,7 @@ body.native-app .tabbar button span {
   .pulse-hero,
   .motion-panel,
   .consultant-card,
+  .nlp-hero,
   .profile-card,
   .practice-option,
   .session-actions {

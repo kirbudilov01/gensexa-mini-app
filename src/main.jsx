@@ -123,12 +123,12 @@ const nlpCards = [
 ];
 
 const vault = [
-  ["free", "Вводный урок: что такое тазовое дно", "6 мин", "Бесплатно"],
-  ["free", "Практика: обратный Кегель", "5 мин", "Бесплатно"],
-  ["paid", "Закрытая запись: чувствительность", "18 мин", "Pro"],
-  ["paid", "Практика: фитнес-Камасутра", "22 мин", "Pro"],
-  ["paid", "НЛП-сессия: новая команда тела", "12 мин", "Pro"],
-  ["paid", "Медитация: мягкая сексуальная энергия", "14 мин", "Pro"],
+  ["free", "◒", "Вводный материал: тазовое дно", "6 мин", "Бесплатно"],
+  ["free", "✦", "Практика: обратный Кегель", "5 мин", "Бесплатно"],
+  ["paid", "∿", "Закрытая запись: чувствительность", "18 мин", "Pro"],
+  ["paid", "◇", "Практика: фитнес-Камасутра", "22 мин", "Pro"],
+  ["paid", "⌁", "НЛП-сессия: новая команда тела", "12 мин", "Pro"],
+  ["paid", "∞", "Медитация: сексуальная энергия", "14 мин", "Pro"],
 ];
 
 const dailyCharacters = {
@@ -248,7 +248,6 @@ function App() {
         </div>
         <BrandMark compact />
       </header>
-      <SectionRail active={tab} setTab={setTab} />
 
       <main className="content">
         {tab === "pulse" && (
@@ -271,19 +270,6 @@ function App() {
         ))}
       </nav>
     </div>
-  );
-}
-
-function SectionRail({ active, setTab }) {
-  return (
-    <nav className="section-rail" aria-label="Разделы">
-      {tabs.map(([id, label, icon]) => (
-        <button key={id} className={cx(active === id && "is-active")} onClick={() => setTab(id)}>
-          <span>{icon}</span>
-          <b>{label}</b>
-        </button>
-      ))}
-    </nav>
   );
 }
 
@@ -424,48 +410,50 @@ function Pulse({ state, patchState, setTab, setZoneId, setPracticeId, complete }
   const levelProgress = state.points % 100;
   return (
     <div className="stack">
-      <section className="pulse-hero">
-        <div>
-          <p className="micro">пульс дня · {cycleText}</p>
-          <h2>{recommendation.headline}</h2>
-          <p>{recommendation.caption}</p>
+      <section className="daily-board">
+        <div className="daily-board-head">
+          <div>
+            <p className="micro">пульс дня · {cycleText}</p>
+            <h2>{recommendation.headline}</h2>
+          </div>
+          <button className="round-action" onClick={() => setTab("profile")}>⋯</button>
         </div>
-        <div className="pulse-score">
-          <span>{character.title} · уровень {level}</span>
-          <b>{state.points}</b>
-          <small>сияние дня</small>
+
+        <div className="status-icons">
+          <button className="status-tile status-tile--wide" onClick={() => setTab("body")}>
+            <span>◒</span>
+            <b>{character.title}</b>
+            <small>{character.tone}</small>
+          </button>
+          <button className="status-tile" onClick={() => setTab("profile")}>
+            <span>✦</span>
+            <b>{state.points}</b>
+            <small>сияние</small>
+          </button>
+          <button className="status-tile" onClick={() => setTab("profile")}>
+            <span>↗</span>
+            <b>{level}</b>
+            <small>уровень</small>
+          </button>
+        </div>
+
+        <div className="daily-progress">
           <i style={{ "--score": `${levelProgress}%` }} />
         </div>
       </section>
 
-      <section className="daily-character-card">
-        <div className="character-glyph">{character.icon}</div>
-        <div>
-          <p className="micro">персонаж дня</p>
-          <h3>{character.title}</h3>
-          <p>{character.tone}</p>
+      <section className="today-actions">
+        <div className="section-title">
+          <p className="micro">сегодня</p>
+          <h3>Три коротких шага</h3>
         </div>
-      </section>
-
-      <section className="day-plan">
         <DayItem done={bodyDone} label="Тело" title={recommendation.body.title} time={bodyDone ? "готово" : `${recommendation.body.duration} мин`} onClick={() => { setZoneId(recommendation.zone); setPracticeId(recommendation.body.id); setTab("body"); }} />
         <DayItem done={nlpDone} label="Убеждение дня" title={recommendation.nlp.reframe} time={nlpDone ? "в пульсе" : "4 мин"} onClick={() => setTab("nlp")} />
-        <DayItem label="Урок" title="Почему тело держит напряжение" time="free" onClick={() => setTab("vault")} />
+        <DayItem label="Материал" title="Вводный материал из практикума" time="free" onClick={() => setTab("vault")} />
       </section>
 
       <Checkin state={state} patchState={patchState} />
       <CalendarStrip state={state} patchState={patchState} />
-
-      <section className="practice-card feature">
-        <div className="card-head">
-          <div><p className="micro">быстрый старт</p><h3>{recommendation.body.title}</h3></div>
-          <span className="duration">{recommendation.body.tracker}</span>
-        </div>
-        <p>{recommendation.body.intro}</p>
-        <button className={cx("primary", bodyDone && "done-button")} onClick={() => complete(recommendation.body.id)}>
-          {bodyDone ? "Готово. Ты молодец" : "Сделала"}
-        </button>
-      </section>
     </div>
   );
 }
@@ -651,6 +639,12 @@ function Body({ zone, practice, setZoneId, setPracticeId, complete, done }) {
           </div>
           {zone.practices.map((item) => (
             <article key={item.id} className={cx("practice-option", item.id === practice.id && "selected")}>
+              <div className={cx("motion-preview", `motion-${item.motion}`)}>
+                <span className="figure-head" />
+                <span className="figure-spine" />
+                <span className="figure-hips" />
+                <span className="figure-ribbon" />
+              </div>
               <button className="practice-option-main" onClick={() => setPracticeId(item.id)}>
                 <span>
                   <small>{item.tracker} · {item.duration} мин</small>
@@ -708,17 +702,20 @@ function Nlp({ state, patchState, complete }) {
   const card = nlpCards.find((item) => item.id === state.beliefId) || nlpCards[0];
   return (
     <div className="stack">
-      <section className="consultant-card">
-        <div className="consultant-avatar">S</div>
-        <div><p className="micro">консультант дня</p><h2>Перепрошивка убеждения</h2><p>Позже сюда можно подключить GPT: он будет вести диалог, уточнять сопротивление и собирать персональную фразу.</p></div>
+      <section className="nlp-hero">
+        <div className="consultant-avatar">⌁</div>
+        <div>
+          <p className="micro">НЛП · 4 минуты</p>
+          <h2>Переписать сценарий дня</h2>
+          <p>Выбери фразу, которую тело держит как напряжение. Приложение даст новую команду и короткий телесный якорь.</p>
+        </div>
       </section>
       <section className="belief-card">
-        <p className="micro">старый сценарий</p>
-        <h3>{card.belief}</h3>
-        <div className="rewrite-arrow">↓</div>
-        <p className="micro">новая команда</p>
-        <h2>{card.reframe}</h2>
-        <p>{card.ritual}</p>
+        <div className="rewrite-flow">
+          <div><span>1</span><small>старый сценарий</small><b>{card.belief}</b></div>
+          <div><span>2</span><small>новая команда</small><b>{card.reframe}</b></div>
+          <div><span>3</span><small>якорь в теле</small><b>{card.ritual}</b></div>
+        </div>
         <button className="primary" onClick={() => complete(`nlp-${card.id}`)}>Переписала сегодня</button>
       </section>
       <section className="practice-grid">
@@ -738,10 +735,11 @@ function Vault() {
       <section className="paywall">
         <BrandMark compact />
         <h2>Практикум</h2>
-        <p>Библиотека коротких записей и практик под ежедневный пульс. Бесплатно - база, Pro - больше вариантов на разные состояния дня.</p>
+        <p>Здесь будут записи клиента: бесплатная база и закрытые материалы Pro. Сейчас это структура витрины, чтобы показать механику доступа.</p>
       </section>
-      {vault.map(([access, title, time, badge]) => (
+      {vault.map(([access, icon, title, time, badge]) => (
         <button key={title} className={cx("lesson-row", access === "paid" && "locked")}>
+          <em>{icon}</em>
           <span><b>{title}</b><small>{time}</small></span>
           <i>{access === "paid" ? "🔒 " : ""}{badge}</i>
         </button>
@@ -767,7 +765,7 @@ function Profile({ state, patchState }) {
         <div><p className="micro">персонаж дня</p><h2>{character.title}</h2><p>{state.points} сияния · уровень {level}</p></div>
       </section>
       <section className="panel">
-        <h3>Твой daily-характер</h3>
+        <h3>Настройки пульса</h3>
         <div className="insights">
           <span>Цель: {intentions.find(([id]) => id === state.intention)?.[1]}</span>
           <span>День цикла: {state.cycleKnown ? state.cycleDay : "не указан"}</span>
@@ -775,9 +773,25 @@ function Profile({ state, patchState }) {
           <span>Сегодня: {character.title}</span>
         </div>
       </section>
-      <section className="panel">
-        <h3>Настройки</h3>
-        <button className="ghost" onClick={() => patchState({ onboarded: false })}>Пройти онбординг заново</button>
+      <section className="panel settings-panel">
+        <h3>Изменить цель</h3>
+        <div className="chip-grid">
+          {intentions.map(([id, label]) => (
+            <button key={id} className={cx("chip", state.intention === id && "selected")} onClick={() => patchState({ intention: id })}>{label}</button>
+          ))}
+        </div>
+      </section>
+      <section className="panel settings-panel">
+        <h3>Цикл и ритм</h3>
+        <label className="cycle-row"><span>День цикла</span><input type="number" min="1" max="45" value={state.cycleDay} onChange={(event) => patchState({ cycleDay: Number(event.target.value), cycleKnown: true })} /><b></b></label>
+        <div className="minute-grid">
+          {[3, 7, 12].map((minutes) => (
+            <button key={minutes} className={cx("choice", state.minutes === minutes && "selected")} onClick={() => patchState({ minutes })}>
+              {minutes}<span>мин</span>
+            </button>
+          ))}
+        </div>
+        <button className="ghost secondary-reset" onClick={() => patchState({ onboarded: false })}>Пересобрать онбординг</button>
       </section>
     </div>
   );
